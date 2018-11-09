@@ -1,0 +1,16 @@
+Application ID : es_sensor_network
+Device ID : es_rasp_sn
+
+Activation Method : ABP
+
+Device EUI : 0032A150B3522D75
+Application EUI : 70B3D57ED0014471
+
+Device Address : 260113BD
+
+Network Session Key : BCA408D8F5DBA6BBFDD10BA79780321E
+App Session Key : 1026F5D1F16362FA1120378302FA923C
+
+
+
+
