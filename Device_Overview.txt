@@ -3,13 +3,13 @@ Device ID : es_rasp_sn
 
 Activation Method : ABP
 
-Device EUI : 0032A150B3522D75
-Application EUI : 70B3D57ED0014471
+Device EUI : 00 32 A1 50 B3 52 2D 75
+Application EUI : 70 B3 D5 7E D0 01 44 71
 
 Device Address : 260113BD
 
-Network Session Key : BCA408D8F5DBA6BBFDD10BA79780321E
-App Session Key : 1026F5D1F16362FA1120378302FA923C
+Network Session Key : BC A4 08 D8 F5 DB A6 BB FD D1 0B A7 97 80 32 1E
+App Session Key :     10 26 F5 D1 F1 63 62 FA 11 20 37 83 02 FA 92 3C
 
 
 
