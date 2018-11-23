@@ -40,7 +40,7 @@
 
 const std::string SERVER_ADDRESS("eu.thethings.network:1883");
 const std::string CLIENT_ID("sync_subcribe_cpp");
-const std::string TOPIC("es_sensor_network/devices/es_rasp_sn/events/down/scheduled");
+const std::string TOPIC("es_sensor_network/devices/es_rasp_sn/up");
 const std::string USERNAME("es_sensor_network");
 const std::string PASSWORD("ttn-account-v2.NC7lBuZ1_ztXF1cSXrJnswIX4kDSCBJjQTWF_xIjce4");
 
