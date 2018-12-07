@@ -24,8 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
-QMAKE_CXXFLAGS += -Wall -std=c++11 -I.. -I/usr/local/lib
-QMAKE_LIBS += -L../../lib -L/usr/local/include -lpaho-mqttpp3 -lpaho-mqtt3a
+QMAKE_CXXFLAGS += -Wall -std=c++11 -I/usr/local/include
+QMAKE_LIBS += -L/usr/local/lib -lpaho-mqttpp3 -lpaho-mqtt3a
 
 SOURCES += \
         main.cpp \
