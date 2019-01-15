@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += charts
+QT       += mqtt
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,22 +27,35 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 QMAKE_CXXFLAGS += -Wall -std=c++11 -I/usr/local/include
-QMAKE_LIBS += -L/usr/local/lib -lpaho-mqttpp3 -lpaho-mqtt3a
+QMAKE_LIBS += -L/usr/local/lib
 
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    mqttclient.cpp
+    dialog.cpp
 
 HEADERS += \
         mainwindow.h \
-    mqttclient.h \
-    callback.h
+    json.hpp \
+    dialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+STATECHARTS +=
+
+DISTFILES +=
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../qtmqtt-5.11.2/build/lib/release/ -lQtMqtt
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../qtmqtt-5.11.2/build/lib/debug/ -lQtMqtt
+else:mac: LIBS += -F$$PWD/../../../../../qtmqtt-5.11.2/build/lib/ -framework QtMqtt
+else:unix: LIBS += -L$$PWD/../../../../../qtmqtt-5.11.2/build/lib/ -lQtMqtt
+
+INCLUDEPATH += $$PWD/../../../../../qtmqtt-5.11.2/build/lib/QtMqtt.framework
+DEPENDPATH += $$PWD/../../../../../qtmqtt-5.11.2/build/lib/QtMqtt.framework

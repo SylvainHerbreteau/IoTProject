@@ -2,7 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "mqttclient.h"
+#include <QMqttClient>
+#include <QtCore/QDateTime>
+#include <QtWidgets/QMessageBox>
+#include <QMetaEnum>
+#include "dialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,9 +20,23 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_buttonConnect_clicked();
+    void on_buttonSubscribe_clicked();
+    void updateLogStateChange();
+    void connectedSlot();
+    void disconnectedSlot();
+    void usernameChangedSlot();
+    void passwordChangedSlot();
+    void updateLogErrorChanged();
+    void disconnectionSlot();
+    void messageReceivedSlot(const QByteArray &message, const QMqttTopicName &topic);
+
 private:
     Ui::MainWindow *ui;
-    mqttclient client;
+    QMqttClient *client;
+    Dialog *d;
+    QString msg;
 };
 
 #endif // MAINWINDOW_H
