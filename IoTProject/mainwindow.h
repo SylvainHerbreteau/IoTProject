@@ -6,7 +6,7 @@
 #include <QtCore/QDateTime>
 #include <QtWidgets/QMessageBox>
 #include <QMetaEnum>
-#include "dialog.h"
+#include "chartwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,7 +35,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QMqttClient *client;
-    Dialog *d;
+    ChartWindow *w;
     QString msg;
 };
 

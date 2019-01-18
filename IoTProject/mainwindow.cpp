@@ -1,22 +1,25 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    d = new Dialog();
+    w = new ChartWindow();
 
     client = new QMqttClient(this);
-    client->setHostname("eu.thethings.network");
     client->setPort(1883);
-    client->setClientId("sync_subcribe_cpp");
+
+    client->setHostname(ui->lineEdit_Host->text());
+    client->setClientId(ui->lineEdit_Client->text());
 
     client->setUsername(ui->lineEdit_Username->text());
     client->setPassword(ui->lineEdit_Password->text());
 
-    ui->textEdit_Log->setWindowOpacity(0.1);
+
+    //ui->textEdit_Log->setWindowOpacity(0.5);
 
     connect(client, &QMqttClient::stateChanged, this, &MainWindow::updateLogStateChange);
     connect(ui->pushButton_Connect, &QPushButton::clicked, this, &MainWindow::on_buttonConnect_clicked);
@@ -26,8 +29,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(client, &QMqttClient::usernameChanged, this, &MainWindow::usernameChangedSlot);
     connect(client, &QMqttClient::passwordChanged, this, &MainWindow::passwordChangedSlot);
     connect(client, &QMqttClient::errorChanged, this, &MainWindow::updateLogErrorChanged);
-    connect(d, &Dialog::finished, this, &MainWindow::disconnectionSlot);
+    connect(w, &QDialog::finished, this, &MainWindow::disconnectionSlot);
     connect(client, &QMqttClient::messageReceived, this, &MainWindow::messageReceivedSlot);
+    connect(client, &QMqttClient::messageReceived, w, &ChartWindow::messageReceivedSlot);
+
+    ui->lineEdit_Host->insert("eu.thethings.network");
+    //ui->lineEdit_Port->insert("1883");
+    ui->lineEdit_Client->insert("sync_subcribe_cpp");
+    ui->lineEdit_Username->insert("es_sensor_network");
+    ui->lineEdit_Password->insert("ttn-account-v2.NC7lBuZ1_ztXF1cSXrJnswIX4kDSCBJjQTWF_xIjce4");
+    ui->lineEdit_Topic->insert("es_sensor_network/devices/es_rasp_sn/up");
 
 }
 
@@ -54,8 +65,16 @@ void MainWindow::on_buttonConnect_clicked(){
 
     if(client->state() == QMqttClient::Disconnected){
 
+        client->setHostname(ui->lineEdit_Host->text());
+        client->setClientId(ui->lineEdit_Client->text());
+
         client->setUsername(ui->lineEdit_Username->text());
         client->setPassword(ui->lineEdit_Password->text());
+
+        std::cout << ui->lineEdit_Host->text().toStdString() << std::endl;
+        std::cout << ui->lineEdit_Topic->text().toStdString() << std::endl;
+        //std::cout << ui->lineEdit_Port->text().toUShort() << std::endl;
+
 
         client->connectToHost();
 
@@ -83,7 +102,7 @@ void MainWindow::on_buttonSubscribe_clicked(){
                 + ui->lineEdit_Topic->text()
                 + QLatin1Char('\n');
         ui->textEdit_Log->insertPlainText(txt);
-
+        //ui->textEdit_Log->
     }
 }
 
@@ -94,8 +113,8 @@ void MainWindow::connectedSlot(){
     ui->textEdit_Log->setTextColor("green");
     ui->textEdit_Log->insertPlainText(content);
     ui->textEdit_Log->setTextColor("black");
-    d->show();
-    d->raise();
+    w->show();
+    w->raise();
 }
 
 void MainWindow::disconnectedSlot(){
@@ -105,7 +124,7 @@ void MainWindow::disconnectedSlot(){
     ui->textEdit_Log->setTextColor("red");
     ui->textEdit_Log->insertPlainText(content);
     ui->textEdit_Log->setTextColor("black");
-    d->close();
+    w->close();
 }
 
 void MainWindow::disconnectionSlot(){
@@ -114,6 +133,7 @@ void MainWindow::disconnectionSlot(){
     ui->pushButton_Connect->setText("Connect");
     client->disconnectFromHost();
 }
+
 void MainWindow::usernameChangedSlot(){
     const QString content = QDateTime::currentDateTime().toString()
                     + QLatin1String("::> Username Changed to :")
@@ -170,21 +190,30 @@ void MainWindow::updateLogErrorChanged(){
 }
 
 void MainWindow::messageReceivedSlot(const QByteArray &message, const QMqttTopicName &topic){
+
+    QString msgstr = QString::fromStdString(message.toStdString());
+
+    ui->textEdit_Log->setTextColor("Blue");
     const QString content = QDateTime::currentDateTime().toString()
                     + QLatin1String("::> Received message from topic : ")
                     + topic.name()
                     + QLatin1String("\n")
                     + QLatin1String("Message :")
-                    + QString::fromStdString(message.toStdString())
-                    + QLatin1Char('\n');
+                    + QLatin1String("\n")
+                    + QLatin1String("\n");
 
     ui->textEdit_Log->insertPlainText(content);
+    ui->textEdit_Log->setTextColor("Black");
+    ui->textEdit_Log->insertPlainText(msgstr + QLatin1Char('\n'));
 
+    ui->textEdit_Log->insertPlainText("\n");
+
+    //w->parseMessage(msgstr);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete d;
+    delete w;
 
 }
