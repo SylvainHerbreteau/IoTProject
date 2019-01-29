@@ -6,6 +6,7 @@
 #include <QtCore/QDateTime>
 #include <QtWidgets/QMessageBox>
 #include <QMetaEnum>
+#include <QTextCursor>
 #include "chartwindow.h"
 
 namespace Ui {

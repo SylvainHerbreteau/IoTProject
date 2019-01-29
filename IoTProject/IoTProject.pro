@@ -32,16 +32,18 @@ QMAKE_LIBS += -L/usr/local/lib
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    dialog.cpp
+    datachart.cpp \
+    chartwindow.cpp
 
 HEADERS += \
         mainwindow.h \
     json.hpp \
-    dialog.h
+    datachart.h \
+    chartwindow.h
 
 FORMS += \
         mainwindow.ui \
-    dialog.ui
+    chartwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "dialog.h"
+#include "chartwindow.h"
 #include <QApplication>
 #include <QStyle>
 #include <QDesktopWidget>
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
                     w.size(),
                     a.desktop()->availableGeometry()
                 ));
-    //Dialog d;
+    //ChartWindow d;
     w.show();
     //d.show();
 

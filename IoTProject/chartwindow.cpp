@@ -67,9 +67,13 @@ void ChartWindow::parseMessage(QString msg){
     data->series_hum->append(data->nb_msg, hum);
     data->series_pres->append(data->nb_msg, pres);
 
+   // std::cout << "error ici" << std::endl;
+
     data->chart_temp->addSeries(data->series_temp);
     data->chart_hum->addSeries(data->series_hum);
     data->chart_pres->addSeries(data->series_pres);
+
+   // std::cout << "fin error" << std::endl;
 
     data->chart_temp->createDefaultAxes();
     data->chart_hum->createDefaultAxes();
@@ -79,9 +83,9 @@ void ChartWindow::parseMessage(QString msg){
     data->chart_hum->axisX()->setRange(0, data->nb_msg);
     data->chart_pres->axisX()->setRange(0, data->nb_msg);
 
-    data->chart_temp->axisY()->setRange(data->min_temp - 1, data->max_temp +1);
-    data->chart_hum->axisY()->setRange(data->min_hum - 1, data->max_hum +1);
-    data->chart_pres->axisY()->setRange(data->min_pres - 1, data->max_pres +1);
+    data->chart_temp->axisY()->setRange(25, data->max_temp +1);
+    data->chart_hum->axisY()->setRange(25, data->max_hum +1);
+    data->chart_pres->axisY()->setRange(1000, data->max_pres +1);
 
     ui->lcdNumber_temp->setSegmentStyle(QLCDNumber::SegmentStyle::Flat);
     ui->lcdNumber_humidity->setSegmentStyle(QLCDNumber::SegmentStyle::Flat);

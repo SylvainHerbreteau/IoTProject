@@ -40,6 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_Password->insert("ttn-account-v2.NC7lBuZ1_ztXF1cSXrJnswIX4kDSCBJjQTWF_xIjce4");
     ui->lineEdit_Topic->insert("es_sensor_network/devices/es_rasp_sn/up");
 
+//    QPalette p = ui->textEdit_Log->palette();
+//    p.setColor(QPalette::Base, QColor(0, 0, 0));
+//    ui->textEdit_Log->setPalette(p);
 }
 
 void MainWindow::updateLogStateChange()
@@ -53,6 +56,10 @@ void MainWindow::updateLogStateChange()
     default : state = "Connected";
                break;
     }
+
+    QTextCursor newCursor = ui->textEdit_Log->textCursor();
+    newCursor.movePosition(QTextCursor::End);
+    ui->textEdit_Log->setTextCursor(newCursor);
 
     const QString content = QDateTime::currentDateTime().toString()
                     + QLatin1String("::> State Change : ")
@@ -71,20 +78,19 @@ void MainWindow::on_buttonConnect_clicked(){
         client->setUsername(ui->lineEdit_Username->text());
         client->setPassword(ui->lineEdit_Password->text());
 
-        std::cout << ui->lineEdit_Host->text().toStdString() << std::endl;
-        std::cout << ui->lineEdit_Topic->text().toStdString() << std::endl;
-        //std::cout << ui->lineEdit_Port->text().toUShort() << std::endl;
-
-
         client->connectToHost();
 
         ui->lineEdit_Username->setEnabled(false);
         ui->lineEdit_Password->setEnabled(false);
+        ui->lineEdit_Host->setEnabled(false);
+        ui->lineEdit_Client->setEnabled(false);
         ui->pushButton_Connect->setText("Disconnect");
     }
     else{
         ui->lineEdit_Password->setEnabled(true);
         ui->lineEdit_Username->setEnabled(true);
+        ui->lineEdit_Host->setEnabled(true);
+        ui->lineEdit_Client->setEnabled(true);
         ui->pushButton_Connect->setText("Connect");
         client->disconnectFromHost();
     }
@@ -97,6 +103,11 @@ void MainWindow::on_buttonSubscribe_clicked(){
         return;
     }
     else{
+
+        QTextCursor newCursor = ui->textEdit_Log->textCursor();
+        newCursor.movePosition(QTextCursor::End);
+        ui->textEdit_Log->setTextCursor(newCursor);
+
         QString txt = QDateTime::currentDateTime().toString()
                 + "::> Subscribing to :"
                 + ui->lineEdit_Topic->text()
@@ -110,6 +121,11 @@ void MainWindow::connectedSlot(){
     const QString content = QDateTime::currentDateTime().toString()
                     + QLatin1String("::> Connected")
                     + QLatin1Char('\n');
+
+    QTextCursor newCursor = ui->textEdit_Log->textCursor();
+    newCursor.movePosition(QTextCursor::End);
+    ui->textEdit_Log->setTextCursor(newCursor);
+
     ui->textEdit_Log->setTextColor("green");
     ui->textEdit_Log->insertPlainText(content);
     ui->textEdit_Log->setTextColor("black");
@@ -121,6 +137,11 @@ void MainWindow::disconnectedSlot(){
     const QString content = QDateTime::currentDateTime().toString()
                     + QLatin1String("::> Disconnected")
                     + QLatin1Char('\n');
+
+    QTextCursor newCursor = ui->textEdit_Log->textCursor();
+    newCursor.movePosition(QTextCursor::End);
+    ui->textEdit_Log->setTextCursor(newCursor);
+
     ui->textEdit_Log->setTextColor("red");
     ui->textEdit_Log->insertPlainText(content);
     ui->textEdit_Log->setTextColor("black");
@@ -130,6 +151,8 @@ void MainWindow::disconnectedSlot(){
 void MainWindow::disconnectionSlot(){
     ui->lineEdit_Password->setEnabled(true);
     ui->lineEdit_Username->setEnabled(true);
+    ui->lineEdit_Host->setEnabled(true);
+    ui->lineEdit_Client->setEnabled(true);
     ui->pushButton_Connect->setText("Connect");
     client->disconnectFromHost();
 }
@@ -139,6 +162,11 @@ void MainWindow::usernameChangedSlot(){
                     + QLatin1String("::> Username Changed to :")
                     + client->username()
                     + QLatin1Char('\n');
+
+    QTextCursor newCursor = ui->textEdit_Log->textCursor();
+    newCursor.movePosition(QTextCursor::End);
+    ui->textEdit_Log->setTextCursor(newCursor);
+
     ui->textEdit_Log->insertPlainText(content);
 }
 
@@ -147,6 +175,11 @@ void MainWindow::passwordChangedSlot(){
                     + QLatin1String("::> Password Changed to :")
                     + client->password()
                     + QLatin1Char('\n');
+
+    QTextCursor newCursor = ui->textEdit_Log->textCursor();
+    newCursor.movePosition(QTextCursor::End);
+    ui->textEdit_Log->setTextCursor(newCursor);
+
     ui->textEdit_Log->insertPlainText(content);
 }
 
@@ -176,6 +209,10 @@ void MainWindow::updateLogErrorChanged(){
             break;
     }
 
+    QTextCursor newCursor = ui->textEdit_Log->textCursor();
+    newCursor.movePosition(QTextCursor::End);
+    ui->textEdit_Log->setTextCursor(newCursor);
+
     const QString content = QDateTime::currentDateTime().toString()
                     + QLatin1String("::> Error : ")
                     + error
@@ -193,7 +230,11 @@ void MainWindow::messageReceivedSlot(const QByteArray &message, const QMqttTopic
 
     QString msgstr = QString::fromStdString(message.toStdString());
 
-    ui->textEdit_Log->setTextColor("Blue");
+    ui->textEdit_Log->setTextColor("blue");
+    QTextCursor newCursor = ui->textEdit_Log->textCursor();
+    newCursor.movePosition(QTextCursor::End);
+    ui->textEdit_Log->setTextCursor(newCursor);
+
     const QString content = QDateTime::currentDateTime().toString()
                     + QLatin1String("::> Received message from topic : ")
                     + topic.name()
@@ -202,13 +243,18 @@ void MainWindow::messageReceivedSlot(const QByteArray &message, const QMqttTopic
                     + QLatin1String("\n")
                     + QLatin1String("\n");
 
+
     ui->textEdit_Log->insertPlainText(content);
-    ui->textEdit_Log->setTextColor("Black");
+
+    QTextCursor newCursor2 = ui->textEdit_Log->textCursor();
+    newCursor.movePosition(QTextCursor::End);
+    ui->textEdit_Log->setTextCursor(newCursor);
+
+    ui->textEdit_Log->setTextColor("black");
     ui->textEdit_Log->insertPlainText(msgstr + QLatin1Char('\n'));
 
     ui->textEdit_Log->insertPlainText("\n");
 
-    //w->parseMessage(msgstr);
 }
 
 MainWindow::~MainWindow()

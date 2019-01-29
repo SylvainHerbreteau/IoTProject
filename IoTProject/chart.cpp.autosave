@@ -1,0 +1,144 @@
+#include "chart.h"
+#include "ui_dialog.h"
+
+Dialog::Dialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Dialog)
+{
+    ui->setupUi(this);
+
+    QChartView *chartView;
+
+    chartView = new QChartView(createPresChart());
+    ui->gridLayoutChart->addWidget(chartView, 1, 1);
+    charts << chartView;
+
+    chartView = new QChartView(createHumChart());
+    ui->gridLayoutChart->addWidget(chartView, 2, 1);
+    charts << chartView;
+
+    chartView = new QChartView(createTempChart());
+    ui->gridLayoutChart->addWidget(chartView, 1, 2);
+    charts << chartView;
+
+    QPalette pal = qApp->palette();
+    pal.setColor(QPalette::Window, QRgb(0xf0f0f0));
+    pal.setColor(QPalette::WindowText, QRgb(0x404044));
+    qApp->setPalette(pal);
+}
+
+Dialog::~Dialog()
+{
+    delete ui;
+}
+
+QChart * Dialog::createPresChart(){
+    QChart *chart = new QChart();
+
+    chart->setTitle("Pressure Chart");
+
+    QLineSeries *series = new QLineSeries(chart);
+
+    series->append(1, 1);
+    series->setName("val1");
+    series->append(2, 1);
+    series->setName("val2");
+    series->append(3, 1);
+    series->setName("val3");
+    series->append(4, 1);
+    series->setName("val4");
+    series->append(5, 1);
+    series->setName("val5");
+    series->append(6, 1);
+    series->setName("val6");
+    series->append(7, 1);
+    series->setName("val7");
+    series->append(8, 1);
+    series->setName("val8");
+    series->append(9, 1);
+    series->setName("val9");
+
+    chart->addSeries(series);
+
+    chart->createDefaultAxes();
+
+    chart->axisX()->setRange(0, 10);
+    chart->axisY()->setRange(0, 5);
+
+    return chart;
+
+}
+
+QChart * Dialog::createTempChart(){
+    QChart *chart = new QChart();
+
+    chart->setTitle("Temperature Chart");
+
+    QLineSeries *series = new QLineSeries(chart);
+
+    series->append(1, 1);
+    series->setName("val1");
+    series->append(2, 1);
+    series->setName("val2");
+    series->append(3, 1);
+    series->setName("val3");
+    series->append(4, 1);
+    series->setName("val4");
+    series->append(5, 1);
+    series->setName("val5");
+    series->append(6, 1);
+    series->setName("val6");
+    series->append(7, 1);
+    series->setName("val7");
+    series->append(8, 1);
+    series->setName("val8");
+    series->append(9, 1);
+    series->setName("val9");
+
+    chart->addSeries(series);
+
+    chart->createDefaultAxes();
+
+    chart->axisX()->setRange(0, 10);
+    chart->axisY()->setRange(0, 5);
+
+    return chart;
+
+}
+
+QChart * Dialog::createHumChart(){
+    QChart *chart = new QChart();
+
+    chart->setTitle("Humidity Chart");
+
+    QLineSeries *series = new QLineSeries(chart);
+
+    series->append(1, 1);
+    series->setName("val1");
+    series->append(2, 1);
+    series->setName("val2");
+    series->append(3, 1);
+    series->setName("val3");
+    series->append(4, 1);
+    series->setName("val4");
+    series->append(5, 1);
+    series->setName("val5");
+    series->append(6, 1);
+    series->setName("val6");
+    series->append(7, 1);
+    series->setName("val7");
+    series->append(8, 1);
+    series->setName("val8");
+    series->append(9, 1);
+    series->setName("val9");
+
+    chart->addSeries(series);
+
+    chart->createDefaultAxes();
+
+    chart->axisX()->setRange(0, 10);
+    chart->axisY()->setRange(0, 5);
+
+    return chart;
+
+}

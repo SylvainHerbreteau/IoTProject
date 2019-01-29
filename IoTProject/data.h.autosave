@@ -1,0 +1,30 @@
+#ifndef DATA_H
+#define DATA_H
+
+#include <QtCharts/QChartGlobal>
+#include <QtCharts/QLineSeries>
+#include <vector>
+
+QT_BEGIN_NAMESPACE
+class QComboBox;
+class QCheckBox;
+class Ui_ThemeWidgetForm;
+QT_END_NAMESPACE
+
+QT_CHARTS_BEGIN_NAMESPACE
+class QChartView;
+class QChart;
+QT_CHARTS_END_NAMESPACE
+
+QT_CHARTS_USE_NAMESPACE
+
+class data
+{
+public:
+    data();
+    QLineSeries * series_temp;
+    QLineSeries * series_hum;
+    QLineSeries * series_pres;
+};
+
+#endif // DATA_H

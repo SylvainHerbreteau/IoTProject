@@ -20,9 +20,9 @@ datachart::datachart()
     chart_hum->setTitle("Humidity Chart");
     chart_pres->setTitle("Pressure Chart");
 
-    chart_temp->setTheme(QChart::ChartThemeDark);
-    chart_hum->setTheme(QChart::ChartThemeDark);
-    chart_pres->setTheme(QChart::ChartThemeDark);
+    chart_temp->setTheme(QChart::ChartThemeLight);
+    chart_hum->setTheme(QChart::ChartThemeLight);
+    chart_pres->setTheme(QChart::ChartThemeLight);
 
     series_temp = new QLineSeries(chart_temp);
     series_hum = new QLineSeries(chart_hum);

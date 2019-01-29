@@ -29,7 +29,7 @@
       <x>-1</x>
       <y>-1</y>
       <width>601</width>
-      <height>461</height>
+      <height>431</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -131,12 +131,12 @@
             </font>
            </property>
            <property name="text">
-            <string>Topic</string>
+            <string>Topic :</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_Topic"/>
          </item>
          <item row="1" column="1">
           <widget class="QPushButton" name="pushButton_Subscribe">
@@ -144,6 +144,9 @@
             <string>Subscribe</string>
            </property>
           </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEdit_Topic"/>
          </item>
         </layout>
        </item>
@@ -176,6 +179,26 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>429</y>
+      <width>601</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>SE 2018-2019</string>
+    </property>
    </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
