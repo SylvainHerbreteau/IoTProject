@@ -17,18 +17,24 @@ class ChartWindow : public QDialog
 public:
     explicit ChartWindow(QWidget *parent = nullptr);
 
+    //Used to parse the received message
     void parseMessage(QString msg);
+
+    //Used to display the Json on the textEdit widget
+    void displayJson(int cMsg);
     ~ChartWindow();
 
 public slots :
-    void messageReceivedSlot(const QByteArray &message, const QMqttTopicName &topic); //update LCD + add Combo box
-    void displayJson(int cMsg);
+    /* Called when a message is received*/
+    void messageReceivedSlot(const QByteArray &message, const QMqttTopicName &topic);
+
 
 private slots :
     void selectedCombo();
 
 private:
     Ui::ChartWindow *ui;
+    QChartView * chartview;
     datachart *data;
     QList<QChartView *> charts;
     int currentMsg;

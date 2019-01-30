@@ -1,4 +1,6 @@
 #include "datachart.h"
+#include <iostream>
+#include <string>
 
 datachart::datachart()
 {
@@ -40,11 +42,5 @@ datachart::datachart()
 }
 
 datachart::~datachart(){
-    delete chart_temp;
-    delete chart_hum;
-    delete chart_pres;
 
-    delete series_temp;
-    delete series_hum;
-    delete series_pres;
 }

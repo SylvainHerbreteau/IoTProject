@@ -18,9 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     client->setUsername(ui->lineEdit_Username->text());
     client->setPassword(ui->lineEdit_Password->text());
 
-
-    //ui->textEdit_Log->setWindowOpacity(0.5);
-
     connect(client, &QMqttClient::stateChanged, this, &MainWindow::updateLogStateChange);
     connect(ui->pushButton_Connect, &QPushButton::clicked, this, &MainWindow::on_buttonConnect_clicked);
     connect(ui->pushButton_Subscribe, &QPushButton::clicked, this, &MainWindow::on_buttonSubscribe_clicked);
@@ -32,17 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(w, &QDialog::finished, this, &MainWindow::disconnectionSlot);
     connect(client, &QMqttClient::messageReceived, this, &MainWindow::messageReceivedSlot);
     connect(client, &QMqttClient::messageReceived, w, &ChartWindow::messageReceivedSlot);
-
-    ui->lineEdit_Host->insert("eu.thethings.network");
-    //ui->lineEdit_Port->insert("1883");
-    ui->lineEdit_Client->insert("sync_subcribe_cpp");
-    ui->lineEdit_Username->insert("es_sensor_network");
-    ui->lineEdit_Password->insert("ttn-account-v2.NC7lBuZ1_ztXF1cSXrJnswIX4kDSCBJjQTWF_xIjce4");
-    ui->lineEdit_Topic->insert("es_sensor_network/devices/es_rasp_sn/up");
-
-//    QPalette p = ui->textEdit_Log->palette();
-//    p.setColor(QPalette::Base, QColor(0, 0, 0));
-//    ui->textEdit_Log->setPalette(p);
 }
 
 void MainWindow::updateLogStateChange()
@@ -259,7 +245,6 @@ void MainWindow::messageReceivedSlot(const QByteArray &message, const QMqttTopic
 
 MainWindow::~MainWindow()
 {
-    delete ui;
     delete w;
-
+    delete ui;
 }
