@@ -25,6 +25,9 @@
    <layout class="QGridLayout" name="gridLayoutChart">
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayoutPayload">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
       <item>
        <widget class="QLabel" name="label_payload">
         <property name="font">

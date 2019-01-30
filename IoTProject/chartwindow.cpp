@@ -14,17 +14,25 @@ ChartWindow::ChartWindow(QWidget *parent) :
 
     QChartView * chartview;
 
+    ui->gridLayoutChart->setOriginCorner(Qt::BottomRightCorner);
+
     chartview = new QChartView(data->chart_temp);
-    ui->gridLayoutChart->addWidget(chartview, 1,1);
+    ui->gridLayoutChart->addWidget(chartview);
     charts << chartview;
 
     chartview = new QChartView(data->chart_hum);
-    ui->gridLayoutChart->addWidget(chartview, 1, 2);
+    ui->gridLayoutChart->addWidget(chartview, 1, 1);
     charts << chartview;
 
     chartview = new QChartView(data->chart_pres);
-    ui->gridLayoutChart->addWidget(chartview, 2, 1);
+    ui->gridLayoutChart->addWidget(chartview, 0, 1);
     charts << chartview;
+
+
+
+//    ui->gridLayoutChart->removeItem(ui->verticalLayoutPayload);
+//    ui->gridLayoutChart->addLayout(ui->verticalLayoutPayload, 2, 2, 0, 0);
+
 
     QPalette pal = qApp->palette();
     pal.setColor(QPalette::Window, QRgb(0xf0f0f0));
