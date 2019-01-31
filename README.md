@@ -2,4 +2,4 @@
 IoT Project made during the last year at ENSEIRB-Matmeca.
 
 * IoT_Project_Node : Librairies and source code to run the device.
-* IoT_Project : The GUI application source code  in C++.
+* Cpp : The GUI application source code  in C++.

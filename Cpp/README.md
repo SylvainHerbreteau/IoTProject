@@ -34,7 +34,7 @@ The building process is also explained on the QtCharts repository
 
 ## Software installation
 
-To compile and execute the programm, cd into the project directory then run :
+To compile and execute the programm, cd into the project directory then run (or you can do it via QtCreator) :
 
 ```bash
     mkdir build 
