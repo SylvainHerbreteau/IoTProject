@@ -1,9 +1,0 @@
-Pour le client MQTT :
---> Telecharger MQTT.fx  :
-https://www.hivemq.com/blog/mqtt-toolbox-mqtt-fx
-
---> Telecharger Paho C et paho C++ (d'abord le C) :
-https://www.eclipse.org/paho/clients/c/
-https://www.eclipse.org/paho/clients/cpp/
-
-Mtjadtwm15@
